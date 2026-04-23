@@ -1,7 +1,7 @@
 [build]
   command = "npm install --legacy-peer-deps"
   functions = "netlify/functions"
-  publish = "public"
+  publish = "."
 
 [functions]
   node_bundler = "esbuild"
