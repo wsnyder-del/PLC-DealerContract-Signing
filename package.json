@@ -1,0 +1,10 @@
+{
+  "name": "plc-dealer-signing",
+  "version": "1.0.0",
+  "description": "PLC Dealer Agreement Online Signing Portal",
+  "dependencies": {
+    "@netlify/functions": "^2.8.2",
+    "nodemailer": "^6.10.1",
+    "pdf-lib": "^1.17.1"
+  }
+}
