@@ -8,8 +8,21 @@ const GRAY = rgb(0.42, 0.45, 0.50);
 const BLACK = rgb(0, 0, 0);
 const WHITE = rgb(1, 1, 1);
 
+// Sanitize text for pdf-lib — strips non-latin1 characters that crash the renderer
+function safe(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/[\u2018\u2019]/g, "'")   // smart single quotes
+    .replace(/[\u201C\u201D]/g, '"')   // smart double quotes
+    .replace(/\u2013/g, '-')           // en dash
+    .replace(/\u2014/g, '--')          // em dash
+    .replace(/\u2026/g, '...')         // ellipsis
+    .replace(/[^\x00-\xFF]/g, '');     // strip anything outside latin-1
+}
+
 function wrapText(text, maxWidth, font, fontSize) {
-  const words = text.split(' ');
+  const cleaned = safe(text);
+  const words = cleaned.split(' ');
   const lines = [];
   let current = '';
   for (const word of words) {
@@ -188,7 +201,7 @@ async function buildPDF(payload) {
     page.drawText('PERSONAL GUARANTEE OF PAYMENT', {
       x: margin + 10, y: y - 8, size: 8.5, font: boldFont, color: NAVY
     });
-    const guaranteeText = `${payload.signerName}, individually and not solely in their capacity as owner of ${payload.companyName}, hereby personally and unconditionally guarantees the full and timely payment of all amounts owed under this Agreement, including all Service Fees, collection costs, and attorneys' fees. This guarantee is continuing and may be enforced directly against the undersigned without first pursuing remedies against ${payload.companyName}.`;
+    const guaranteeText = safe(`${payload.signerName}, individually and not solely in their capacity as owner of ${payload.companyName}, hereby personally and unconditionally guarantees the full and timely payment of all amounts owed under this Agreement, including all Service Fees, collection costs, and attorneys' fees. This guarantee is continuing and may be enforced directly against the undersigned without first pursuing remedies against ${payload.companyName}.`);
     const gLines = wrapText(guaranteeText, contentWidth - 20, font, smallSize);
     let gy = y - 20;
     gLines.forEach(line => {
@@ -288,11 +301,11 @@ async function buildPDF(payload) {
   }
 
   page.drawRectangle({ x: col1X, y: sigY - 60, width: colW, height: 0.5, color: GRAY });
-  page.drawText(`${payload.signerName}`, { x: col1X, y: sigY - 72, size: 8.5, font: boldFont, color: BLACK });
-  page.drawText(`${payload.signerTitle || ''}${payload.companyName ? '  |  ' + payload.companyName : ''}`, {
+  page.drawText(safe(payload.signerName), { x: col1X, y: sigY - 72, size: 8.5, font: boldFont, color: BLACK });
+  page.drawText(safe(`${payload.signerTitle || ''}${payload.companyName ? '  |  ' + payload.companyName : ''}`), {
     x: col1X, y: sigY - 84, size: 8, font, color: GRAY
   });
-  page.drawText(`Date: ${payload.signedDate}`, { x: col1X, y: sigY - 96, size: 8, font, color: BLACK });
+  page.drawText(safe(`Date: ${payload.signedDate}`), { x: col1X, y: sigY - 96, size: 8, font, color: BLACK });
 
   // PLC column
   page.drawText('PIONEER LEGAL CONSULTING, LLC:', { x: col2X, y: sigY, size: 8, font: boldFont, color: NAVY });
