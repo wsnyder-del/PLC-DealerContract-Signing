@@ -211,7 +211,53 @@ async function buildPDF(payload) {
     y = gy - 10;
   }
 
-  // ── REP AGREEMENT BODY ───────────────────────────────────────────────────
+  // ── ENERGY PURE SPECIFIC ADDENDUM ────────────────────────────────────────
+  const isEnergyPure = payload.companyName &&
+    payload.companyName.trim().toLowerCase().replace(/\s+/g,'').includes('energypure');
+
+  if (payload.docs.dealer && isEnergyPure) {
+    // New page for EP provisions
+    newPage();
+    drawLine('DEALER-SPECIFIC PROVISIONS -- ENERGY PURE', { size: 12, f: boldFont, color: NAVY, center: true });
+    spacer(0.3);
+    drawLine('These provisions are incorporated into and made part of this Agreement. In the event of any conflict between these provisions and the foregoing terms, these provisions control.', { size: smallSize, color: GRAY });
+    spacer(0.5);
+
+    y = drawSection(page, 'EP-1. Mutual Client Protection', font, boldFont, bodySize, margin, y, pageWidth, margin);
+    drawLine('EP-1.1 Mutual Confidentiality of Commercial Terms. Both Parties acknowledge that the commercial terms of this Agreement -- including pricing, fee structures, and the business relationship between PLC and Energy Pure -- constitute Confidential Information of both Parties. Neither Party shall disclose these commercial terms to any Client or third party without prior written consent, except as required by law.', { size: bodySize, indent: 8 });
+    drawLine('EP-1.2 PLC Limitation on Direct Client Pricing Discussions. When PLC contacts Clients directly, PLC will not initiate discussions regarding alternative pricing, fee adjustments, or pricing structures that differ from the pricing originally agreed upon and closed by Energy Pure. PLC\'s direct Client contact is limited to service updates, compliance call scheduling, documentation requests, matter-related communications, and payment status in the event of non-payment or termination. PLC\'s right to contact clients directly in the event of non-payment or termination remains fully intact.', { size: bodySize, indent: 8 });
+    spacer(0.5);
+
+    y = drawSection(page, 'EP-2. Pricing Consistency in Client Communications', font, boldFont, bodySize, margin, y, pageWidth, margin);
+    drawLine('EP-2.1 No Unilateral Pricing Changes. PLC shall reference only the pricing structure originally agreed upon and closed by Energy Pure\'s representatives. PLC shall not communicate any pricing modification to a Client without Energy Pure\'s prior written consent, except where Energy Pure has defaulted on payment, in which case PLC may communicate its standard Service Fee as part of a Client transition process.', { size: bodySize, indent: 8 });
+    drawLine('EP-2.2 Consistency Applies Both Ways. Energy Pure agrees not to communicate to Clients any representation that PLC\'s fees, scope of services, or timelines differ from what PLC has confirmed in writing.', { size: bodySize, indent: 8 });
+    spacer(0.5);
+
+    y = drawSection(page, 'EP-3. Scope of Energy Pure\'s Responsibility', font, boldFont, bodySize, margin, y, pageWidth, margin);
+    drawLine('EP-3.1 Energy Pure\'s Role is Sales and Client Acquisition Only. Energy Pure\'s role is limited to: (a) identifying and acquiring prospective clients; (b) presenting PLC\'s services per approved training and scripts; and (c) collecting and submitting documentation and payment. Energy Pure has no liability related to the legal strategy, execution, or outcome of PLC\'s Solar Exiting Services.', { size: bodySize, indent: 8 });
+    drawLine('EP-3.2 Solar Project Cancellation Exemption. Energy Pure is fully exempt from any responsibility or liability arising from the cancellation, reversal, or non-performance of any underlying solar installation project. Energy Pure\'s obligation is limited to referring clients and remitting PLC\'s wholesale Service Fee.', { size: bodySize, indent: 8 });
+    drawLine('EP-3.3 No Legal Liability for Client Outcomes. Energy Pure makes no representation to Clients regarding the legal outcome of PLC\'s services and shall not be held liable for any result achieved or not achieved by PLC on behalf of any Client.', { size: bodySize, indent: 8 });
+    spacer(0.5);
+
+    y = drawSection(page, 'EP-4. Non-Circumvention Clarification and Trade Name Protection', font, boldFont, bodySize, margin, y, pageWidth, margin);
+    drawLine('EP-4.1 Scope of Non-Circumvention. The non-circumvention clause in Section 3.6 prohibits Energy Pure from redirecting a Client already submitted to PLC to a competing provider for the purpose of avoiding payment to PLC for that specific Client matter.', { size: bodySize, indent: 8 });
+    drawLine('EP-4.2 What Non-Circumvention Does NOT Restrict. This provision does not restrict Energy Pure from: continuing to sell solar systems or other products outside PLC\'s scope; working with other firms on matters not submitted to PLC; terminating this Agreement and engaging a different provider for future matters after proper termination; or operating its core solar sales business in any manner.', { size: bodySize, indent: 8 });
+    drawLine('EP-4.3 Prohibition on Unauthorized Use of PLC\'s Trade Name. Energy Pure and all of its representatives, employees, subcontractors, and affiliated partner companies are expressly prohibited from using PLC\'s trade name, brand, logo, or service descriptions to solicit, close, or collect payment from any client outside the scope of this Agreement without remitting PLC\'s wholesale Service Fee. No representative or partner may: represent to any client that PLC is handling their matter unless that client is formally submitted and fully paid; collect payment for PLC\'s services and retain those funds; or present, advertise, or sell PLC\'s services under any arrangement not pre-approved in writing by PLC.', { size: bodySize, indent: 8, f: boldFont });
+    spacer(0.5);
+
+    y = drawSection(page, 'EP-5. Sales Representatives and Partner Company Vetting', font, boldFont, bodySize, margin, y, pageWidth, margin);
+    drawLine('EP-5.1 Individual Sales Representatives -- Ongoing Onboarding Permitted. Energy Pure may continuously onboard new individual sales representatives without limit. Each must complete PLC\'s approved training and execute a Rep Compliance Agreement before any client-facing activity.', { size: bodySize, indent: 8 });
+    drawLine('EP-5.2 Partner Companies Require PLC Vetting and Prior Written Approval. Any arrangement to extend or sub-license the right to present, sell, or refer clients for PLC\'s Solar Exiting Services to another business entity (a "Partner Company") requires PLC\'s prior written approval before that Partner Company may present or sell PLC\'s services in any capacity. PLC\'s reputation, brand, and legal exposure are directly affected by every entity that presents its services to consumers, and PLC must verify that any Partner Company meets the same standards required of Energy Pure.', { size: bodySize, indent: 8, f: boldFont });
+    drawLine('EP-5.3 Partner Company Vetting Process. Energy Pure shall submit: (a) the Partner Company\'s business name, ownership, and state of organization; (b) its sales model and client base; (c) existing compliance or training programs; and (d) the proposed scope of involvement with PLC\'s services. PLC shall respond within ten (10) business days. Approval shall not be unreasonably withheld where the Partner Company meets PLC\'s standards.', { size: bodySize, indent: 8 });
+    drawLine('EP-5.4 Approved Partner Companies Bound by This Agreement. Any approved Partner Company shall execute PLC\'s standard Dealer/Vendor Agreement or a written addendum before presenting PLC\'s services. Energy Pure remains jointly responsible for the conduct of any approved Partner Company operating under Energy Pure\'s umbrella.', { size: bodySize, indent: 8 });
+    spacer(0.5);
+
+    y = drawSection(page, 'EP-6. Initial 15-Day Supervised Launch Period', font, boldFont, bodySize, margin, y, pageWidth, margin);
+    drawLine('EP-6.1 Supervised Deal Closing. During the first fifteen (15) calendar days following the Effective Date, Energy Pure\'s principal (or a designated senior representative approved by PLC) will personally accompany Energy Pure\'s representatives in client-facing presentations and closings to ensure quality control and consistent messaging.', { size: bodySize, indent: 8 });
+    drawLine('EP-6.2 Training and Compliance Requirements Apply During Launch Period. The supervised launch period does not modify training or compliance requirements. All representatives must have completed PLC\'s approved training and executed a Rep Compliance Agreement before any client contact. The presence of a senior representative does not substitute for individual compliance agreement execution.', { size: bodySize, indent: 8 });
+    drawLine('EP-6.3 Payment Obligations Apply from Day One. All Client submissions during the launch period are subject to the full $3,500.00 Service Fee, 48-hour payment requirement, and all other payment terms of this Agreement.', { size: bodySize, indent: 8 });
+    spacer(0.8);
+  }
   if (payload.docs.rep) {
     if (payload.docs.dealer) {
       checkY(40);
