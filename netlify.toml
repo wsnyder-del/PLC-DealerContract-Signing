@@ -1,11 +1,10 @@
 [build]
   command = "npm install --legacy-peer-deps"
-  functions = "netlify/functions"
   publish = "."
 
 [functions]
+  directory = "netlify/functions"
   node_bundler = "esbuild"
-  included_files = ["netlify/functions/**"]
 
 [[headers]]
   for = "/*"
