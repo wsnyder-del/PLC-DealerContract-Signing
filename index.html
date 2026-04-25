@@ -570,6 +570,14 @@
       </div>
     </div>
 
+    <div class="field-row" id="dealer-addr2-row">
+      <div class="field">
+        <label>Home / Alternate Address <span class="req">*</span></label>
+        <input type="text" id="f-address2" placeholder="456 Home Ave, City, State 12345">
+        <span class="field-error" id="err-address2">Required</span>
+      </div>
+    </div>
+
     <div class="field-row cols-2">
       <div class="field">
         <label>Email Address <span class="req">*</span></label>
@@ -577,9 +585,21 @@
         <span class="field-error" id="err-email">Valid email required</span>
       </div>
       <div class="field">
-        <label>Phone Number <span class="req">*</span></label>
+        <label>Primary Phone <span class="req">*</span></label>
         <input type="tel" id="f-phone" placeholder="(555) 000-0000">
         <span class="field-error" id="err-phone">Required</span>
+      </div>
+    </div>
+
+    <div class="field-row cols-2">
+      <div class="field">
+        <label>Secondary Phone</label>
+        <input type="tel" id="f-phone2" placeholder="(555) 000-0000">
+      </div>
+      <div class="field">
+        <label>Date of Birth <span class="req">*</span></label>
+        <input type="date" id="f-dob">
+        <span class="field-error" id="err-dob">Required</span>
       </div>
     </div>
 
@@ -916,7 +936,7 @@ function clearErr(id) {
 function validateStep2() {
   let ok = true;
   const required = ['f-name','f-title','f-email','f-phone'];
-  if (state.docs.dealer) required.push('f-company','f-state','f-address');
+  if (state.docs.dealer) required.push('f-company','f-state','f-address','f-address2','f-dob');
   if (!state.docs.dealer && state.docs.rep) required.push('f-rep-dealer');
 
   required.forEach(id => {
@@ -1056,9 +1076,12 @@ async function submitAgreement() {
     signerTitle: document.getElementById('f-title').value,
     signerEmail: document.getElementById('f-email').value,
     signerPhone: document.getElementById('f-phone').value,
+    signerPhone2: document.getElementById('f-phone2').value,
+    signerDOB: document.getElementById('f-dob').value,
     companyName: document.getElementById('f-company').value,
     companyState: document.getElementById('f-state').value,
     companyAddress: document.getElementById('f-address').value,
+    companyAddress2: document.getElementById('f-address2').value,
     repDealerName: document.getElementById('f-rep-dealer').value,
     signatureImage: sigDataUrl,
     signedDate: new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'}),
