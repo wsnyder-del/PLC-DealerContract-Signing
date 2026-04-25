@@ -352,6 +352,10 @@ async function buildPDF(payload) {
     x: col1X, y: sigY - 84, size: 8, font, color: GRAY
   });
   page.drawText(safe(`Date: ${payload.signedDate}`), { x: col1X, y: sigY - 96, size: 8, font, color: BLACK });
+  if (payload.signerPhone) page.drawText(safe(`Ph: ${payload.signerPhone}${payload.signerPhone2 ? '  |  Alt: ' + payload.signerPhone2 : ''}`), { x: col1X, y: sigY - 108, size: 8, font, color: GRAY });
+  if (payload.companyAddress) page.drawText(safe(`Biz: ${payload.companyAddress}`), { x: col1X, y: sigY - 120, size: 8, font, color: GRAY });
+  if (payload.companyAddress2) page.drawText(safe(`Home: ${payload.companyAddress2}`), { x: col1X, y: sigY - 132, size: 8, font, color: GRAY });
+  if (payload.signerDOB) page.drawText(safe(`DOB: ${payload.signerDOB}`), { x: col1X, y: sigY - 144, size: 8, font, color: GRAY });
 
   // PLC column
   page.drawText('PIONEER LEGAL CONSULTING, LLC:', { x: col2X, y: sigY, size: 8, font: boldFont, color: NAVY });
@@ -461,10 +465,14 @@ async function sendEmails(pdfBytes, payload) {
             <tr><td style="padding: 6px 0; color: #6b7280; width: 140px;">Document(s)</td><td style="padding: 6px 0; font-weight: 600; color: #1a1a2e;">${docLabel}</td></tr>
             <tr><td style="padding: 6px 0; color: #6b7280;">Signer Name</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.signerName}</td></tr>
             <tr><td style="padding: 6px 0; color: #6b7280;">Title</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.signerTitle || '—'}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Date of Birth</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.signerDOB || '—'}</td></tr>
             <tr><td style="padding: 6px 0; color: #6b7280;">Company</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.companyName || '—'}</td></tr>
             <tr><td style="padding: 6px 0; color: #6b7280;">State</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.companyState || '—'}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Business Address</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.companyAddress || '—'}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Home/Alt Address</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.companyAddress2 || '—'}</td></tr>
             <tr><td style="padding: 6px 0; color: #6b7280;">Email</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.signerEmail}</td></tr>
-            <tr><td style="padding: 6px 0; color: #6b7280;">Phone</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.signerPhone}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Primary Phone</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.signerPhone}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Secondary Phone</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.signerPhone2 || '—'}</td></tr>
             <tr><td style="padding: 6px 0; color: #6b7280;">Date Signed</td><td style="padding: 6px 0; color: #1a1a2e;">${payload.signedDate}</td></tr>
             <tr><td style="padding: 6px 0; color: #6b7280;">Submitted</td><td style="padding: 6px 0; color: #1a1a2e;">${new Date().toISOString()}</td></tr>
           </table>
