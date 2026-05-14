@@ -507,10 +507,11 @@
     <div class="panel-sub">Choose the document(s) you have been directed to sign by Pioneer Legal Consulting.</div>
 
     <div class="doc-selector">
-      <div class="doc-card" id="card-dealer" onclick="toggleDoc('dealer')">
+      <div class="doc-card" id="card-dealer" onclick="promptDealerPIN()" style="position:relative;">
         <div class="doc-card-icon">📄</div>
         <div class="doc-card-title">Dealer / Vendor Agreement</div>
         <div class="doc-card-desc">Master wholesale agreement between your company and Pioneer Legal Consulting, LLC. Includes personal guarantee.</div>
+        <div id="dealer-lock-badge" style="position:absolute;top:10px;right:14px;font-size:14px;opacity:0.5;">🔒</div>
       </div>
       <div class="doc-card" id="card-rep" onclick="toggleDoc('rep')">
         <div class="doc-card-icon">📋</div>
@@ -713,6 +714,25 @@
 
 </main>
 
+<!-- Dealer PIN Modal -->
+<div id="dealer-pin-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:1000;display:none;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:12px;padding:36px 40px;max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.25);text-align:center;">
+    <div style="font-size:28px;margin-bottom:12px;">🔒</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#0A1F44;margin-bottom:8px;">Dealer Access Required</div>
+    <div style="font-size:13px;color:#6b7280;margin-bottom:24px;">Enter your dealer PIN to access the Dealer / Vendor Agreement.</div>
+    <input type="password" id="dealer-pin-input" maxlength="10"
+      style="width:100%;border:1.5px solid #e5e7eb;border-radius:6px;padding:11px 14px;font-size:16px;text-align:center;letter-spacing:4px;outline:none;margin-bottom:8px;font-family:'DM Sans',sans-serif;"
+      placeholder="• • • •" onkeydown="if(event.key==='Enter')checkDealerPIN()">
+    <div id="dealer-pin-error" style="font-size:12px;color:#dc2626;margin-bottom:12px;display:none;">Incorrect PIN. Please try again.</div>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:8px;">
+      <button onclick="closeDealerPIN()"
+        style="background:transparent;border:1.5px solid #0A1F44;color:#0A1F44;border-radius:6px;padding:10px 22px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Cancel</button>
+      <button onclick="checkDealerPIN()"
+        style="background:#0A1F44;border:none;color:#fff;border-radius:6px;padding:10px 22px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Confirm</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── State ──────────────────────────────────────────────────────────────────
 const state = {
@@ -720,6 +740,7 @@ const state = {
   currentStep: 1,
   sigHasContent: false,
   scrolledToBottom: false,
+  dealerUnlocked: false,
 };
 
 // ── Document content ───────────────────────────────────────────────────────
@@ -904,6 +925,36 @@ function goStep(n) {
 }
 
 // ── Doc selection ──────────────────────────────────────────────────────────
+const DEALER_PIN = '3624';
+
+function promptDealerPIN() {
+  // If already unlocked just toggle
+  if (state.dealerUnlocked) { toggleDoc('dealer'); return; }
+  const modal = document.getElementById('dealer-pin-modal');
+  modal.style.display = 'flex';
+  document.getElementById('dealer-pin-input').value = '';
+  document.getElementById('dealer-pin-error').style.display = 'none';
+  setTimeout(() => document.getElementById('dealer-pin-input').focus(), 100);
+}
+
+function checkDealerPIN() {
+  const val = document.getElementById('dealer-pin-input').value.trim();
+  if (val === DEALER_PIN) {
+    state.dealerUnlocked = true;
+    closeDealerPIN();
+    document.getElementById('dealer-lock-badge').style.display = 'none';
+    toggleDoc('dealer');
+  } else {
+    document.getElementById('dealer-pin-error').style.display = 'block';
+    document.getElementById('dealer-pin-input').value = '';
+    document.getElementById('dealer-pin-input').focus();
+  }
+}
+
+function closeDealerPIN() {
+  document.getElementById('dealer-pin-modal').style.display = 'none';
+}
+
 function toggleDoc(type) {
   state.docs[type] = !state.docs[type];
   document.getElementById(`card-${type}`).classList.toggle('selected', state.docs[type]);
