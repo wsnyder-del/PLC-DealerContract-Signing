@@ -298,22 +298,22 @@ async function buildPDF(payload) {
     spacer(0.5);
 
     y = drawSection(page, '2. Compensation and Payment Terms', font, boldFont, bodySize, margin, y, pageWidth, margin);
-    drawLine('2.1 Wholesale Service Fee: $3,500.00 per Client. Dealer is solely responsible for all Service Fees. Clients have no payment obligation to PLC under this Agreement.', { size: bodySize, indent: 8, f: boldFont });
-    drawLine('2.2 Payment Before Work Begins. PLC requires payment of the full $3,500.00 Service Fee before any work is initiated. This is a firm, non-negotiable condition of engagement.', { size: bodySize, indent: 8 });
-    drawLine('2.3 Accepted Payment Methods. Wire transfer, Zelle, ACH, or other pre-approved direct electronic transfer only. PLC does not absorb any transaction fees -- Dealer ensures PLC receives the full $3,500.00 net of any fees.', { size: bodySize, indent: 8 });
-    drawLine("2.4 Klarna/Third-Party Financing. Klarna acceptance/denial is solely Klarna's determination. Klarna/Stripe processing fees are borne entirely by Dealer. PLC's $3,500.00 fee is owed regardless of fees imposed. Dealer's net proceeds are paid only after funds clear PLC's deposit account.", { size: bodySize, indent: 8 });
+    drawLine('2.1 Wholesale Service Fee: $4,000.00 per Client. Dealer is solely responsible for all Service Fees. Clients have no payment obligation to PLC under this Agreement.', { size: bodySize, indent: 8, f: boldFont });
+    drawLine('2.2 Payment Before Work Begins. PLC requires payment of the full $4,000.00 Service Fee before any work is initiated. This is a firm, non-negotiable condition of engagement.', { size: bodySize, indent: 8 });
+    drawLine('2.3 Accepted Payment Methods. Wire transfer, Zelle, ACH, or other pre-approved direct electronic transfer only. PLC does not absorb any transaction fees -- Dealer ensures PLC receives the full $4,000.00 net of any fees.', { size: bodySize, indent: 8 });
+    drawLine("2.4 Klarna/Third-Party Financing. Klarna acceptance/denial is solely Klarna's determination. Klarna/Stripe processing fees are borne entirely by Dealer. PLC's $4,000.00 fee is owed regardless of fees imposed. Dealer's net proceeds are paid only after funds clear PLC's deposit account.", { size: bodySize, indent: 8 });
     drawLine("2.5 Rep Commissions. PLC does not pay, advance, front, or guarantee any commission to any Dealer representative. All commissions are Dealer's sole obligation from Dealer's net proceeds.", { size: bodySize, indent: 8 });
     drawLine('2.7 Payment Due Within 48 Hours of Submission.', { size: bodySize, indent: 8 });
     drawLine('2.8 Work Stoppage. If any payment remains unpaid more than 5 calendar days after submission, PLC may suspend all active work on every Dealer matter until all balances are paid in full.', { size: bodySize, indent: 8 });
     drawLine('2.9 Work Product Hold. PLC has no obligation to release any work product until all outstanding balances are paid in full.', { size: bodySize, indent: 8 });
     drawLine("2.10 Collection Costs. Dealer is responsible for all costs of collection including reasonable attorneys' fees.", { size: bodySize, indent: 8 });
-    drawLine("2.11 Chargeback Protection. Dealer remains fully responsible for PLC's $3,500.00 fee regardless of any client chargeback, refund demand, financing reversal, reserve hold, or client default.", { size: bodySize, indent: 8 });
+    drawLine("2.11 Chargeback Protection. Dealer remains fully responsible for PLC's $4,000.00 fee regardless of any client chargeback, refund demand, financing reversal, reserve hold, or client default.", { size: bodySize, indent: 8 });
     spacer(0.5);
 
     y = drawSection(page, '3. Wholesale Structure and Dealer Responsibilities', font, boldFont, bodySize, margin, y, pageWidth, margin);
     drawLine("3.1 Wholesale Arrangement. Dealer may resell PLC's services at any price. PLC does not control Dealer's pricing or margins.", { size: bodySize, indent: 8 });
     drawLine("3.2 No Misrepresentation. Dealer shall not guarantee outcomes, characterize PLC as a law firm, or misrepresent PLC's services in any way.", { size: bodySize, indent: 8 });
-    drawLine("3.3 Dealer Retains Full Financial Risk. PLC's $3,500.00 fee is owed in full regardless of whether Dealer collected from any Client or the outcome of any financing.", { size: bodySize, indent: 8 });
+    drawLine("3.3 Dealer Retains Full Financial Risk. PLC's $4,000.00 fee is owed in full regardless of whether Dealer collected from any Client or the outcome of any financing.", { size: bodySize, indent: 8 });
     drawLine("3.4 No False Affiliation. Dealer shall not represent that it is PLC or that its personnel are PLC's attorneys.", { size: bodySize, indent: 8 });
     drawLine('3.5 PLC Right to Contact Clients Directly. PLC may contact any Client directly in the event of Dealer non-payment, dispute, or termination.', { size: bodySize, indent: 8 });
     drawLine('3.6 Non-Circumvention. Dealer shall not redirect any Client to avoid payment obligations. Violation is a material breach and all fees remain immediately due.', { size: bodySize, indent: 8 });
@@ -391,7 +391,7 @@ async function buildPDF(payload) {
     y = drawSection(page, 'EP-6. Initial 15-Day Supervised Launch Period', font, boldFont, bodySize, margin, y, pageWidth, margin);
     drawLine("EP-6.1 Supervised Deal Closing. During the first fifteen (15) calendar days following the Effective Date, Energy Pure's principal (or a designated senior representative approved by PLC) will personally accompany Energy Pure's representatives in client-facing presentations and closings.", { size: bodySize, indent: 8 });
     drawLine("EP-6.2 Training and Compliance Requirements Apply During Launch Period. All representatives must have completed PLC's approved training and executed a Rep Compliance Agreement before any client contact.", { size: bodySize, indent: 8 });
-    drawLine("EP-6.3 Payment Obligations Apply from Day One. All Client submissions during the launch period are subject to the full $3,500.00 Service Fee, 48-hour payment requirement, and all other payment terms of this Agreement.", { size: bodySize, indent: 8 });
+    drawLine("EP-6.3 Payment Obligations Apply from Day One. All Client submissions during the launch period are subject to the full $4,000.00 Service Fee, 48-hour payment requirement, and all other payment terms of this Agreement.", { size: bodySize, indent: 8 });
     spacer(0.8);
   }
 
