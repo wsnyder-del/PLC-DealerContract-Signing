@@ -310,6 +310,25 @@ async function buildPDF(payload) {
     drawLine("2.11 Chargeback Protection. Dealer remains fully responsible for PLC's $4,000.00 fee regardless of any client chargeback, refund demand, financing reversal, reserve hold, or client default.", { size: bodySize, indent: 8 });
     spacer(0.5);
 
+    y = drawSection(page, '2A. Tiered Weekly Pricing Structure', font, boldFont, bodySize, margin, y, pageWidth, margin);
+    drawLine('2A.1 Tiered Fee Schedule. Where the Parties have agreed in writing to a tiered pricing structure, the following wholesale Service Fee schedule applies on a per-week basis:', { size: bodySize, indent: 8 });
+    drawLine('Deals 1-5 in a weekly cycle: $3,750.00 per funded and paid deal', { size: bodySize, indent: 20, f: boldFont });
+    drawLine('Deals 6-10 in a weekly cycle: $3,500.00 per funded and paid deal', { size: bodySize, indent: 20, f: boldFont });
+    drawLine('Deals 11 and above in a weekly cycle: $3,250.00 per funded and paid deal', { size: bodySize, indent: 20, f: boldFont });
+    spacer(0.3);
+    drawLine('2A.2 Weekly Cycle Definition. The weekly pricing cycle begins each Monday at 12:00 AM and ends each Sunday at 11:59 PM in the time zone of PLC\'s principal place of business. Deal counts reset to zero at the start of each new weekly cycle regardless of where Dealer was in the prior week\'s count.', { size: bodySize, indent: 8 });
+    drawLine('2A.3 Funded and Paid Deals Only. TIER ADVANCEMENT IS BASED EXCLUSIVELY ON DEALS THAT ARE BOTH FULLY FUNDED AND PAYMENT HAS BEEN RECEIVED AND CLEARED BY PLC WITHIN THE WEEKLY CYCLE. The following DO NOT count toward tier advancement:', { size: bodySize, indent: 8 });
+    drawLine('Signed client contracts that have not been funded;', { size: bodySize, indent: 20 });
+    drawLine('Submitted files awaiting payment;', { size: bodySize, indent: 20 });
+    drawLine('Partially paid or installment deals where the full Service Fee has not cleared;', { size: bodySize, indent: 20 });
+    drawLine('Deals funded in a prior weekly cycle; or', { size: bodySize, indent: 20 });
+    drawLine('Any deal for which payment has been reversed, charged back, or not fully received by PLC.', { size: bodySize, indent: 20 });
+    drawLine('2A.4 No Credit for Unfunded Contracts. A signed client contract, regardless of the number of contracts signed in a given week, creates no tier credit and no tier advancement. Dealer may not bank or carry forward signed-but-unfunded contracts to claim a lower tier rate in any current or future weekly cycle.', { size: bodySize, indent: 8, f: boldFont });
+    drawLine('2A.5 Mutual Tracking. Both Parties shall independently track funded and paid deals on a weekly basis. PLC\'s records of received and cleared payments shall be the controlling reference for tier determination in the event of any dispute. Dealer may request a weekly funding summary from PLC at any time.', { size: bodySize, indent: 8 });
+    drawLine('2A.6 Tier Pricing Applies to Tiered Agreement Dealers Only. The tiered fee schedule in this Section 2A applies only where expressly agreed in writing between the Parties. Where no tiered agreement exists, the standard flat wholesale Service Fee governs.', { size: bodySize, indent: 8 });
+    drawLine('2A.7 All Other Payment Terms Apply. Sections 2.2 through 2.11 apply in full to all deals regardless of tier. Payment is due within 48 hours of deal submission, work stoppage applies at 5 days, and PLC\'s fee at the applicable tier rate is owed in full regardless of chargebacks, refunds, or client defaults.', { size: bodySize, indent: 8 });
+    spacer(0.5);
+
     y = drawSection(page, '3. Wholesale Structure and Dealer Responsibilities', font, boldFont, bodySize, margin, y, pageWidth, margin);
     drawLine("3.1 Wholesale Arrangement. Dealer may resell PLC's services at any price. PLC does not control Dealer's pricing or margins.", { size: bodySize, indent: 8 });
     drawLine("3.2 No Misrepresentation. Dealer shall not guarantee outcomes, characterize PLC as a law firm, or misrepresent PLC's services in any way.", { size: bodySize, indent: 8 });
