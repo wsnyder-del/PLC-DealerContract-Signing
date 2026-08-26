@@ -298,16 +298,16 @@ async function buildPDF(payload) {
     spacer(0.5);
 
     y = drawSection(page, '2. Compensation and Payment Terms', font, boldFont, bodySize, margin, y, pageWidth, margin);
-    drawLine('2.1 Wholesale Service Fee: $4,000.00 per Client. Dealer is solely responsible for all Service Fees. Clients have no payment obligation to PLC under this Agreement.', { size: bodySize, indent: 8, f: boldFont });
-    drawLine('2.2 Payment Before Work Begins. PLC requires payment of the full $4,000.00 Service Fee before any work is initiated. This is a firm, non-negotiable condition of engagement.', { size: bodySize, indent: 8 });
-    drawLine('2.3 Accepted Payment Methods. Wire transfer, Zelle, ACH, or other pre-approved direct electronic transfer only. PLC does not absorb any transaction fees -- Dealer ensures PLC receives the full $4,000.00 net of any fees.', { size: bodySize, indent: 8 });
-    drawLine("2.4 Klarna/Third-Party Financing. Klarna acceptance/denial is solely Klarna's determination. Klarna/Stripe processing fees are borne entirely by Dealer. PLC's $4,000.00 fee is owed regardless of fees imposed. Dealer's net proceeds are paid only after funds clear PLC's deposit account.", { size: bodySize, indent: 8 });
+    drawLine(`2.1 Wholesale Service Fee: $${fee} per Client. Dealer is solely responsible for all Service Fees. Clients have no payment obligation to PLC under this Agreement.`, { size: bodySize, indent: 8, f: boldFont });
+    drawLine(`2.2 Payment Before Work Begins. PLC requires payment of the full $${fee} Service Fee before any work is initiated. This is a firm, non-negotiable condition of engagement.`, { size: bodySize, indent: 8 });
+    drawLine(paymentMethodText, { size: bodySize, indent: 8 });
+    drawLine(`2.4 Klarna/Third-Party Financing. Klarna acceptance/denial is solely Klarna's determination. Klarna/Stripe processing fees are borne entirely by Dealer. PLC's $${fee} fee is owed regardless of fees imposed. Dealer's net proceeds are paid only after funds clear PLC's deposit account.`, { size: bodySize, indent: 8 });
     drawLine("2.5 Rep Commissions. PLC does not pay, advance, front, or guarantee any commission to any Dealer representative. All commissions are Dealer's sole obligation from Dealer's net proceeds.", { size: bodySize, indent: 8 });
     drawLine('2.7 Payment Due Within 48 Hours of Submission.', { size: bodySize, indent: 8 });
     drawLine('2.8 Work Stoppage. If any payment remains unpaid more than 5 calendar days after submission, PLC may suspend all active work on every Dealer matter until all balances are paid in full.', { size: bodySize, indent: 8 });
     drawLine('2.9 Work Product Hold. PLC has no obligation to release any work product until all outstanding balances are paid in full.', { size: bodySize, indent: 8 });
     drawLine("2.10 Collection Costs. Dealer is responsible for all costs of collection including reasonable attorneys' fees.", { size: bodySize, indent: 8 });
-    drawLine("2.11 Chargeback Protection. Dealer remains fully responsible for PLC's $4,000.00 fee regardless of any client chargeback, refund demand, financing reversal, reserve hold, or client default.", { size: bodySize, indent: 8 });
+    drawLine(`2.11 Chargeback Protection. Dealer remains fully responsible for PLC's $${fee} fee regardless of any client chargeback, refund demand, financing reversal, reserve hold, or client default.`, { size: bodySize, indent: 8 });
     spacer(0.5);
 
     y = drawSection(page, '2A. Tiered Weekly Pricing Structure', font, boldFont, bodySize, margin, y, pageWidth, margin);
@@ -332,7 +332,7 @@ async function buildPDF(payload) {
     y = drawSection(page, '3. Wholesale Structure and Dealer Responsibilities', font, boldFont, bodySize, margin, y, pageWidth, margin);
     drawLine("3.1 Wholesale Arrangement. Dealer may resell PLC's services at any price. PLC does not control Dealer's pricing or margins.", { size: bodySize, indent: 8 });
     drawLine("3.2 No Misrepresentation. Dealer shall not guarantee outcomes, characterize PLC as a law firm, or misrepresent PLC's services in any way.", { size: bodySize, indent: 8 });
-    drawLine("3.3 Dealer Retains Full Financial Risk. PLC's $4,000.00 fee is owed in full regardless of whether Dealer collected from any Client or the outcome of any financing.", { size: bodySize, indent: 8 });
+    drawLine(`3.3 Dealer Retains Full Financial Risk. PLC's $${fee} fee is owed in full regardless of whether Dealer collected from any Client or the outcome of any financing.`, { size: bodySize, indent: 8 });
     drawLine("3.4 No False Affiliation. Dealer shall not represent that it is PLC or that its personnel are PLC's attorneys.", { size: bodySize, indent: 8 });
     drawLine('3.5 PLC Right to Contact Clients Directly. PLC may contact any Client directly in the event of Dealer non-payment, dispute, or termination.', { size: bodySize, indent: 8 });
     drawLine('3.6 Non-Circumvention. Dealer shall not redirect any Client to avoid payment obligations. Violation is a material breach and all fees remain immediately due.', { size: bodySize, indent: 8 });
@@ -377,6 +377,11 @@ async function buildPDF(payload) {
 
   // Energy Pure addendum
   const isEnergyPure = payload.companyName && payload.companyName.trim().toLowerCase().replace(/\s+/g,'').includes('energypure');
+  const isPrimeNation = payload.companyName && payload.companyName.trim().toLowerCase().replace(/\s+/g,'').includes('primenation');
+  const fee = isPrimeNation ? '5,500.00' : '4,000.00';
+  const paymentMethodText = isPrimeNation
+    ? `2.3 Accepted Payment Methods. PLC accepts wire transfer, Zelle, or ACH only. PLC does not accept credit cards or any payment method that incurs a processing fee on PLC's end. If any payment method is used that results in a processing fee, that fee is borne entirely by Dealer and PLC's full $5,500.00 wholesale fee must be received net of all fees. The amount received by PLC must equal the full $5,500.00 regardless of any fees charged by the payment processor.`
+    : `2.3 Accepted Payment Methods. Wire transfer, Zelle, ACH, or other pre-approved direct electronic transfer only. PLC does not absorb any transaction fees -- Dealer ensures PLC receives the full $4,000.00 net of any fees.`;
   if (payload.docs.dealer && isEnergyPure) {
     newPage();
     drawLine('DEALER-SPECIFIC PROVISIONS -- ENERGY PURE', { size: 12, f: boldFont, color: NAVY, center: true });
