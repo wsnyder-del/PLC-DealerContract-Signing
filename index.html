@@ -553,7 +553,7 @@
     <div class="field-row cols-2" id="dealer-fields">
       <div class="field">
         <label>Company / Business Name <span class="req">*</span></label>
-        <input type="text" id="f-company" placeholder="Acme Solar LLC">
+        <input type="text" id="f-company" value="Prime Nation" readonly style="background:#f3f4f6;color:#6b7280;cursor:not-allowed;">
         <span class="field-error" id="err-company">Required</span>
       </div>
       <div class="field">
@@ -745,10 +745,6 @@ const state = {
 
 // ── Document content ───────────────────────────────────────────────────────
 function getDealerContent(name, company, title, state, address) {
-  const fee = isPrimeNation(company) ? '5,500.00' : '4,000.00';
-  const paymentNote = isPrimeNation(company)
-    ? `PLC accepts wire transfer, Zelle, or ACH only. PLC does not accept credit cards or any payment method that incurs a processing fee on PLC's end. If any payment method is used that results in a processing fee, that fee is borne entirely by Dealer and PLC's full $5,500.00 wholesale fee must be received net of all fees. The amount received by PLC must equal the full $5,500.00 regardless of any fees charged by the payment processor.`
-    : `PLC accepts Wire transfer, Zelle, ACH, or other pre-approved direct electronic transfer only. PLC does not absorb any transaction fees -- the amount received by PLC must equal the full $4,000.00 net of any fees.`;
   return `
     <h1>SOLAR EXITING LEGAL SERVICES</h1>
     <div class="doc-sub">Dealer / Vendor Agreement — Master Template</div>
@@ -763,16 +759,16 @@ function getDealerContent(name, company, title, state, address) {
     <p><strong>1.4 Representative Training.</strong> All representatives of Dealer who present PLC's services must first complete PLC's approved training program.</p>
 
     <h2>2. Compensation and Payment Terms</h2>
-    <div class="highlight"><strong>2.1 Wholesale Service Fee: $${fee} per Client.</strong> Dealer is solely responsible for all Service Fees.</div>
-    <p><strong>2.2 Payment Before Work Begins.</strong> PLC requires payment of the full $${fee} Service Fee before any work will be initiated on any Client matter. This is a firm, non-negotiable condition of engagement.</p>
-    <p><strong>2.3 Accepted Payment Methods.</strong> ${paymentNote}</p>
-    <p><strong>2.4 Third-Party Financing (Klarna).</strong> Where Klarna financing is facilitated: (a) Klarna's acceptance/denial is solely Klarna's determination and PLC has no control; (b) finance charges are between Klarna and the Client; (c) Klarna/Stripe processing fees are borne entirely by Dealer; (d) PLC's $${fee} fee is owed regardless of fees imposed; (e) Dealer is paid its net proceeds only after funds clear PLC's deposit account.</p>
+    <div class="highlight"><strong>2.1 Wholesale Service Fee: $5,500.00 per Client.</strong> Dealer is solely responsible for all Service Fees.</div>
+    <p><strong>2.2 Payment Before Work Begins.</strong> PLC requires payment of the full $5,500.00 Service Fee before any work will be initiated on any Client matter. This is a firm, non-negotiable condition of engagement.</p>
+    <p><strong>2.3 Accepted Payment Methods.</strong> PLC accepts wire transfer, Zelle, or ACH only. PLC does not accept credit cards or any payment method that incurs a processing fee on PLC's end. If any payment method is used that results in a processing fee, that fee is borne entirely by Dealer and PLC's full $5,500.00 wholesale fee must be received net of all fees. The amount received by PLC must equal the full $5,500.00 regardless of any fees charged by the payment processor.</p>
+    <p><strong>2.4 Third-Party Financing (Klarna).</strong> Where Klarna financing is facilitated: (a) Klarna's acceptance/denial is solely Klarna's determination and PLC has no control; (b) finance charges are between Klarna and the Client; (c) Klarna/Stripe processing fees are borne entirely by Dealer; (d) PLC's $5,500.00 fee is owed regardless of fees imposed; (e) Dealer is paid its net proceeds only after funds clear PLC's deposit account.</p>
     <p><strong>2.5 Rep Commissions.</strong> PLC does not pay, advance, front, or guarantee any commission to any Dealer representative. All commissions are Dealer's sole obligation, payable from Dealer's net proceeds after PLC's fee is satisfied.</p>
-    <p><strong>2.7 Payment Due Within 48 Hours.</strong> Full $${fee} Service Fee is due within 48 hours of Client submission.</p>
+    <p><strong>2.7 Payment Due Within 48 Hours.</strong> Full $5,500.00 Service Fee is due within 48 hours of Client submission.</p>
     <p><strong>2.8 Work Stoppage.</strong> If any payment remains unpaid more than 5 calendar days after submission, PLC may suspend all active work on every Dealer matter until all balances are paid in full.</p>
     <p><strong>2.9 Work Product Hold.</strong> PLC has no obligation to release any work product until all outstanding balances are paid in full.</p>
     <p><strong>2.10 Collection Costs.</strong> Dealer is responsible for all costs of collection including attorneys' fees if PLC must take action to collect amounts owed.</p>
-    <p><strong>2.11 Chargeback Protection.</strong> Dealer remains fully responsible for PLC's $${fee} fee regardless of any client chargeback, refund demand, financing reversal, processor reserve hold, or client default.</p>
+    <p><strong>2.11 Chargeback Protection.</strong> Dealer remains fully responsible for PLC's $5,500.00 fee regardless of any client chargeback, refund demand, financing reversal, processor reserve hold, or client default.</p>
 
     <h2>2A. Tiered Weekly Pricing Structure</h2>
     <p><strong>2A.1 Tiered Fee Schedule.</strong> Where the Parties have agreed in writing to a tiered pricing structure, the following wholesale Service Fee schedule applies on a per-week basis:</p>
@@ -798,7 +794,7 @@ function getDealerContent(name, company, title, state, address) {
     <h2>3. Wholesale Structure & Dealer Responsibilities</h2>
     <p><strong>3.1 Wholesale Arrangement.</strong> Dealer may resell PLC's services at any price. PLC does not control Dealer's resale pricing.</p>
     <p><strong>3.2 No Misrepresentation.</strong> Dealer shall not guarantee outcomes, characterize PLC as a law firm, or misrepresent PLC's services in any way.</p>
-    <p><strong>3.3 Dealer Retains Full Financial Risk.</strong> PLC's $${fee} fee is owed regardless of whether Dealer collected from any Client.</p>
+    <p><strong>3.3 Dealer Retains Full Financial Risk.</strong> PLC's $5,500.00 fee is owed regardless of whether Dealer collected from any Client.</p>
     <p><strong>3.11 Dealer's Full Responsibility for Representatives.</strong> Dealer assumes full and unconditional responsibility for the conduct of every individual acting on its behalf, whether or not that individual has executed a separate Rep Compliance Agreement.</p>
     <p><strong>3.12 Social Media Ownership.</strong> Any accounts or digital assets created using PLC's name or branding are PLC's property and must be transferred to PLC upon termination.</p>
 
@@ -828,10 +824,6 @@ function isEnergyPure(company) {
   return company && company.trim().toLowerCase().replace(/\s+/g,'').includes('energypure');
 }
 
-function isPrimeNation(company) {
-  return company && company.trim().toLowerCase().replace(/\s+/g,'').includes('primenation');
-}
-
 function getEnergyPureAddendum(company) {
   if (!isEnergyPure(company)) return '';
   return `
@@ -858,7 +850,7 @@ function getEnergyPureAddendum(company) {
     <p><strong>EP-4.3 Prohibition on Unauthorized Use of PLC's Trade Name.</strong> <strong>Energy Pure and all of its representatives, employees, subcontractors, and affiliated partner companies are expressly prohibited from using Pioneer Legal Consulting, LLC's trade name, brand, logo, or service descriptions to solicit, close, or collect payment from any client outside the scope of this Agreement and without remitting PLC's wholesale Service Fee.</strong> Specifically:</p>
     <ul>
       <li>No representative or partner of Energy Pure may represent to any client that PLC is handling their matter unless that client has been formally submitted to PLC and full payment has been received by PLC;</li>
-      <li>No representative or partner of Energy Pure may collect payment from any client for PLC's services and retain those funds without remitting PLC's $4,000.00 wholesale fee;</li>
+      <li>No representative or partner of Energy Pure may collect payment from any client for PLC's services and retain those funds without remitting PLC's $5,500.00 wholesale fee;</li>
       <li>No representative or partner of Energy Pure may present, advertise, or sell PLC's services under any arrangement -- formal or informal -- not pre-approved in writing by PLC; and</li>
       <li>Any client payment collected in connection with PLC's services belongs to PLC to the extent of PLC's wholesale fee and must be remitted immediately.</li>
     </ul>
@@ -872,7 +864,7 @@ function getEnergyPureAddendum(company) {
     <h2>EP-6. Initial 15-Day Supervised Launch Period</h2>
     <p><strong>EP-6.1 Supervised Deal Closing.</strong> During the first fifteen (15) calendar days following the Effective Date, Energy Pure's principal (or a designated senior representative approved by PLC) will personally accompany Energy Pure's representatives in client-facing presentations and deal closings to ensure quality control, consistent messaging, and proper implementation of PLC's compliance standards.</p>
     <p><strong>EP-6.2 Training and Compliance Requirements Apply During Launch Period.</strong> The supervised launch period does not modify or delay any training or compliance requirements. All representatives must have completed PLC's approved training and executed a Rep Compliance Agreement prior to any client contact. The presence of a senior representative does not substitute for individual compliance agreement execution.</p>
-    <p><strong>EP-6.3 Payment Obligations Apply from Day One.</strong> The supervised launch period does not modify any payment obligations. All Client submissions during the launch period are subject to the full $4,000.00 Service Fee, 48-hour payment requirement, and all other payment terms of this Agreement.</p>
+    <p><strong>EP-6.3 Payment Obligations Apply from Day One.</strong> The supervised launch period does not modify any payment obligations. All Client submissions during the launch period are subject to the full $5,500.00 Service Fee, 48-hour payment requirement, and all other payment terms of this Agreement.</p>
   `;
 }
 
