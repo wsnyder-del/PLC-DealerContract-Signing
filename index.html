@@ -607,7 +607,7 @@
     <div class="field-row" id="rep-dealer-name-row" style="display:none;">
       <div class="field">
         <label>Dealer / Company You Represent <span class="req">*</span></label>
-        <input type="text" id="f-rep-dealer" value="Clear Your Solar" readonly style="background:#f3f4f6;color:#6b7280;cursor:not-allowed;">
+        <input type="text" id="f-rep-dealer" placeholder="Your Company Name">
         <span class="field-error" id="err-rep-dealer">Required</span>
       </div>
     </div>
@@ -1036,7 +1036,7 @@ function populateAgreement() {
   let html = '';
   if (state.docs.dealer) html += getDealerContent(name, company, title, st, address);
   if (state.docs.dealer && state.docs.rep) html += '<hr style="margin:40px 0;border-color:var(--border)">';
-  if (state.docs.rep) html += getRepContent(name, repDealer || 'Clear Your Solar');
+  if (state.docs.rep) html += getRepContent(name, repDealer || '[DEALER NAME]');
 
   document.getElementById('agreementContent').innerHTML = html;
   state.scrolledToBottom = false;
