@@ -423,7 +423,7 @@ async function buildPDF(payload) {
       spacer(0.5);
     }
 
-    const dealerRef = payload.repDealerName || 'Clear Your Solar';
+    const dealerRef = payload.repDealerName || '[DEALER NAME]';
     drawLine(`Representative: ${payload.signerName}${payload.signerTitle ? ', ' + payload.signerTitle : ''}, acting on behalf of ${dealerRef}.`, { size: bodySize });
     spacer(0.5);
 
